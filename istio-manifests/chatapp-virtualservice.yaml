@@ -1,0 +1,26 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: chatapp
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - chatapp-gateway
+  http:
+  - match:
+    - headers:
+        version:
+          exact: v1
+    route:
+    - destination:
+        host: chatapp-v1
+        subset: v1
+  - match:
+    - headers:
+        version:
+          exact: v2
+    route:
+    - destination:
+        host: chatapp-v2
+        subset: v2

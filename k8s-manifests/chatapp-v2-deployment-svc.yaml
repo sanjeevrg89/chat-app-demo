@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chatapp-v2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chatapp
+      version: v2
+  template:
+    metadata:
+      labels:
+        app: chatapp
+        version: v2
+    spec:
+      containers:
+      - name: chatapp
+        image: chatapp:v2
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: chatapp-v2
+spec:
+  selector:
+    app: chatapp
+    version: v2
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: ClusterIP
