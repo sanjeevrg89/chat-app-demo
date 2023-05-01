@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: chatapp
-          image: chatapp:v1
+          image: public.ecr.aws/r5m2h0c9/chatapp:v1
           ports:
             - containerPort: 5000
           livenessProbe:
